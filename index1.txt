@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CALCULATOR</title>
+    <style>
+      body{
+        background-color: #c0d3cf;
+      }
+
+      #calculator {
+        width: 400px;
+        height: 570px;
+        margin: 100px auto;
+        background-color: #797373;
+        color: #fff;
+        border-radius: 20px;
+        box-shadow: 10px 10px 15px .1px black;
+      }
+
+      .display {
+        width: 100%;
+        height: 80px;
+        background-color: #4e5a49;
+        font-size: 36px;
+        text-align: right;
+        padding: 20px;
+        box-sizing: border-box;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        font-weight: bolder;
+        font-family: cursive;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+        padding: 20px;
+      }
+
+      button {
+        width: 100%;
+        height: 70px;
+        font-size: 24px;
+        background-color: #fff;
+        color: #333;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        filter: drop-shadow(10px 10px 10px rgb(19, 24, 19));
+        font-weight: bolder;
+      }
+      
+      button:hover {
+        transform: scale(1.05);
+      }
+
+      .operator {
+        background-color: #f39c12;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="calculator">
+      <div class="display">0</div>
+      <div class="buttons">
+        <button class="operator" value="clear">C</button>
+        <button class="operator" value="backspace">&larr;</button>
+        <button class="operator" value="%">%</button>
+        <button class="operator" value="/">&divide;</button>
+        <button value="7">7</button>
+        <button value="8">8</button>
+        <button value="9">9</button>
+        <button class="operator" value="*">&times;</button>
+        <button value="4">4</button>
+        <button value="5">5</button>
+        <button value="6">6</button>
+        <button class="operator" value="-">-</button>
+        <button value="1">1</button>
+        <button value="2">2</button>
+        <button value="3">3</button>
+        <button class="operator" value="+">+</button>
+        <button class="operator" value="+/-">&plusmn;</button>
+        <button value="0">0</button>
+        <button class="operator" value=".">.</button>
+        <button class="operator" value="=">=</button>
+      </div>
+    </div>
+
+    <script>
+      const calculator = document.querySelector("#calculator");
+      const display = calculator.querySelector(".display");
+      const buttons = calculator.querySelectorAll("button");
+
+      buttons.forEach(button => {
+        button.addEventListener("click", function() {
+          let value = this.value;
+          let text = display.textContent.trim();
+
+          if (value === "clear") {
+            display.textContent = "0";
+          } else if (value === "backspace") {
+            display.textContent = text.substring(0, text.length - 1) || "0";
+          } else if (value === "=") {
+            try {
+              display.textContent = eval(text);
+            } catch (e) {
+              display.textContent = "Error";
+            }
+          } else if (value === "+/-") {
+            display.textContent = text.startsWith("-") ? text.substring(1) : -${text};
+          } else {
+            display.textContent = text === "0" ? value : text + value;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
